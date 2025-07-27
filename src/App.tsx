@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/layout/Layout';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
+import ErrorBoundary from './utils/errorBoundary';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -21,10 +22,11 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Router>
-          <div className="App">
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <Router>
+            <div className="App">
             <Routes>
               {/* Public routes */}
               <Route path="/login" element={<LoginPage />} />
@@ -77,6 +79,7 @@ function App() {
         </Router>
       </AuthProvider>
     </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 
