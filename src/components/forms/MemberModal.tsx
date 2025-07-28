@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -69,7 +69,6 @@ const MemberModal: React.FC<MemberModalProps> = ({
     handleSubmit,
     reset,
     formState: { errors },
-    watch,
   } = useForm<CreateMemberRequest>({
     resolver: yupResolver(memberSchema) as any,
     defaultValues: {
