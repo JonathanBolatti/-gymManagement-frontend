@@ -7,7 +7,10 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/layout/Layout';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
+import MembersPage from './pages/MembersPage';
+import UsersPage from './pages/UsersPage';
 import ErrorBoundary from './utils/errorBoundary';
 
 // Create a client
@@ -30,6 +33,7 @@ function App() {
             <Routes>
               {/* Public routes */}
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
               
               {/* Protected routes */}
               <Route
@@ -38,6 +42,28 @@ function App() {
                   <ProtectedRoute>
                     <Layout>
                       <DashboardPage />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              
+              <Route
+                path="/members"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <MembersPage />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              
+              <Route
+                path="/users"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <UsersPage />
                     </Layout>
                   </ProtectedRoute>
                 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   UserGroupIcon,
   UsersIcon,
@@ -7,6 +8,8 @@ import {
 } from '@heroicons/react/24/outline';
 
 const DashboardPage: React.FC = () => {
+  const navigate = useNavigate();
+  
   // Datos de ejemplo - en el futuro vendrán de la API
   const stats = [
     {
@@ -156,7 +159,10 @@ const DashboardPage: React.FC = () => {
             Acciones Rápidas
           </h3>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <button className="flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            <button 
+              onClick={() => navigate('/members')}
+              className="flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            >
               <UserGroupIcon className="w-4 h-4 mr-2" />
               Nuevo Miembro
             </button>
@@ -168,7 +174,10 @@ const DashboardPage: React.FC = () => {
               <ChartBarIcon className="w-4 h-4 mr-2" />
               Ver Reportes
             </button>
-            <button className="flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+            <button 
+              onClick={() => navigate('/users')}
+              className="flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+            >
               <UsersIcon className="w-4 h-4 mr-2" />
               Gestionar Usuarios
             </button>

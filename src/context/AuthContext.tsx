@@ -53,10 +53,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
       const response = await apiService.login(credentials);
-      const { accessToken, refreshToken, user: userData } = response.data;
+      const { token, refreshToken, user: userData } = response.data;
       
       // Guardar en localStorage
-      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('accessToken', token);
       localStorage.setItem('refreshToken', refreshToken);
       localStorage.setItem('user', JSON.stringify(userData));
       
@@ -72,10 +72,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
       const response = await apiService.register(userData);
-      const { accessToken, refreshToken, user: newUser } = response.data;
+      const { token, refreshToken, user: newUser } = response.data;
       
       // Guardar en localStorage
-      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('accessToken', token);
       localStorage.setItem('refreshToken', refreshToken);
       localStorage.setItem('user', JSON.stringify(newUser));
       
@@ -99,9 +99,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const refreshToken = localStorage.getItem('refreshToken');
       if (refreshToken) {
         const response = await apiService.refreshToken(refreshToken);
-        const { accessToken, user: userData } = response.data;
+        const { token, user: userData } = response.data;
         
-        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('accessToken', token);
         localStorage.setItem('user', JSON.stringify(userData));
         
         setUser(userData);

@@ -10,7 +10,8 @@ import {
   CreateUserRequest,
   UpdateUserRequest,
   MemberFilters,
-  UserFilters
+  UserFilters,
+  PaginatedResponse
 } from '../types';
 
 // Configuración de la API
@@ -51,11 +52,11 @@ class ApiService {
           if (refreshToken) {
             try {
               const response = await this.refreshToken(refreshToken);
-              const { accessToken } = response.data;
-              localStorage.setItem('accessToken', accessToken);
+              const { token } = response.data;
+              localStorage.setItem('accessToken', token);
               
               // Reintentar la petición original
-              error.config.headers.Authorization = `Bearer ${accessToken}`;
+              error.config.headers.Authorization = `Bearer ${token}`;
               return this.api.request(error.config);
             } catch (refreshError) {
               // Refresh falló, redirigir a login
@@ -120,7 +121,7 @@ class ApiService {
   }
 
   // Métodos de miembros
-  async getMembers(filters?: MemberFilters): Promise<AxiosResponse<Member[]>> {
+  async getMembers(filters?: MemberFilters): Promise<AxiosResponse<PaginatedResponse<Member> | Member[]>> {
     const params = new URLSearchParams();
     if (filters?.search) params.append('search', filters.search);
     if (filters?.membershipType) params.append('membershipType', filters.membershipType);

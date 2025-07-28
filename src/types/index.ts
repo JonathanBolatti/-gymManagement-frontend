@@ -5,8 +5,10 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
+  phone?: string;
   role: UserRole;
   isActive: boolean;
+  lastLogin?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -67,9 +69,13 @@ export interface RegisterRequest {
 }
 
 export interface AuthResponse {
-  accessToken: string;
+  token: string;
   refreshToken: string;
+  tokenType: string;
+  expiresIn: number;
   user: User;
+  issuedAt: string;
+  expiresAt: string;
 }
 
 // Tipos de respuesta de API
@@ -107,6 +113,7 @@ export interface CreateUserRequest {
   password: string;
   firstName: string;
   lastName: string;
+  phone?: string;
   role: UserRole;
 }
 
